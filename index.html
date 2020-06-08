@@ -1,30 +1,78 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Hank Quinlan, Horrible Cop</title>
-		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap 4 Grid Layouts for Large Devices</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Some custom styles to beautify this example */
+      img {
+      max-width: 100%;
+      max-height: 100%;
+      }
+
+      .icon{
+      width: 60px;
+      }
+
+      .portret{
+      width: 300px;
+      }
+
+      
+      .bio{
+      padding: 30px;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: left;
+      <!-- background: #aaaaaa; -->
+      }
+
+      .row{
+      text-align: center;
+            padding: 5px 5px;
+      margin-top: 1rem;
+      background: #dbdfe5;
+      border: 2px solid rgba(255,0,0,0.5)
+      }
+      
+      .cc{
+      background: #abb1b8;
+      padding: 10px 15px;
+      border: 2px solid rgba(0,0,0,0.5)
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3">
+
+      <!-- Image and Bio -->
+      <div class="row">
+        <div class="col-sm cc"><img class="portret" src="img/photo.png" alt="Italian Trulli"></div>
+        <div class="col-sm-8 cc bio">Bio</div>
+
+      </div>
+
+
+      <!-- Links to GitHub LinkedIn Google Scholar -->
+      <div class="row">
+        <div class="col cc"></div>
+	<div class="col-auto cc"><img class="icon" src="img/photo.png" alt="Italian Trulli"></div>
+	<div class="col-auto cc"><img class="icon" src="img/photo.png" alt="Italian Trulli"></div>
+	<div class="col-auto cc"><img class="icon" src="img/photo.png" alt="Italian Trulli"></div>
+	<div class="col-auto cc"><img class="icon" src="img/photo.png" alt="Italian Trulli"></div>
+	<div class="col cc"></div>
+      </div>
+
+      <!-- Publications -->
+
+      
+    </div>
+  </body>
 </html>
