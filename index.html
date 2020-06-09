@@ -99,285 +99,330 @@
       
     </style>
   </head>
-  <body>
+  <body id="page-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-      <div class="container">
-	<div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> -->
-	    <!--   Menu <i class="fa fa-bars"></i> -->
-            <!-- </button> -->
-          <a class="navbar-brand page-scroll" href="#page-top">
-	    🐳 <span class="light">Tomáš</span>  Skřivan
-          </a>
+    <!-- <\!-- Navigation -\-> -->
+      <!-- <nav class="navbar navbar-expand-md bg-light sticky-top" role="navigation"> -->
+	<!--   <div class="container"> -->
+	  <!-- 	<div class="navbar-header"> -->
+	    <!--       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> -->
+	      <!-- 	    Menu <i class="fa fa-bars"></i> -->
+	      <!--       </button> -->
+	    <!--       <a class="navbar-brand page-scroll" href="#page-top"> -->
+	      <!-- 	    🐳 <span class="light">Tomáš</span>  Skřivan -->
+	      <!--       </a> -->
+	    <!-- 	</div> -->
+
+	  <!-- 	<\!-- Collect the nav links, forms, and other content for toggling -\-> -->
+	    <!-- 	<div class="collapse navbar-collapse navbar-right navbar-main-collapse"> -->
+	      <!--       <ul class="nav navbar-nav"> -->
+		<!-- 	    <\!-- Hidden li included to remove active class from about link when scrolled up past about section -\-> -->
+		  <!-- 	    <li class="hidden"> -->
+		    <!-- 	      <a href="#page-top"></a> -->
+		    <!-- 	    </li> -->
+		  <!-- 	    <li> -->
+		    <!-- 	      <a class="page-scroll" href="#about">🚴 CV</a> -->
+		    <!-- 	    </li> -->
+		  <!-- 	    <li> -->
+		    <!-- 	      <a class="page-scroll" href="#download">💩 Publications</a> -->
+		    <!-- 	    </li> -->
+		  <!-- 	    <li> -->
+		    <!-- 	      <a class="page-scroll" href="#contact">📧 Contact</a> -->
+		    <!-- 	    </li> -->
+		  <!-- 	  </ul> -->
+	      <!-- 	</div> -->
+	    <!-- 	<\!-- /.navbar-collapse -\-> -->
+	      <!--   </div> -->
+	<!--   <\!-- /.container -\-> -->
+	  <!-- </nav> -->
+
+      <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+        <a class="navbar-brand page-scroll" href="#page-top">
+	  🐳 <span class="light">Tomáš</span>  Skřivan
+        </a>
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- <div class="navbar-nav"> -->
+            <!--   <a href="#" class="nav-item nav-link active">Home</a> -->
+            <!--   <a href="#" class="nav-item nav-link">Profile</a> -->
+            <!--   <a href="#" class="nav-item nav-link">Messages</a> -->
+            <!--   <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a> -->
+            <!-- </div> -->
+          <div class="navbar-nav ml-auto">
+	    <script type="text/javascript" language="javascript">
+	      <!--
+		  // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+		  // Random encryption key feature coded by Andrew Moulden
+		  // This code is freeware provided these four comment lines remain intact
+		  // A wizard to generate this code is at http://www.jottings.com/obfuscator/
+		  { coded = "GmB3JSqYKRSG@nRS3Q.TKR"
+		  key = "ONG1iJRElxSu5eHBPInwK7pjkV309cQXtChLzUA6q2sZFvmMbDaT4WYr8ygdof"
+		  shift=coded.length
+		  link=""
+		  for (i=0; i<coded.length; i++) {
+		  if (key.indexOf(coded.charAt(i))==-1) {
+		  ltr = coded.charAt(i)
+		  link += (ltr)
+		  }
+		  else {     
+		  ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+		  link += (key.charAt(ltr))
+		  }
+		  }
+		  document.write("<a href='mailto:"+link+"' class=\"nav-item nav-link\">📧 Contact</a>")
+		  }
+		  //-->
+	    </script>
+
+	    <a href="#publications" class="nav-item nav-link">💡 Publications</a>
+          </div>
+	</div>
+      </nav>
+
+      
+      <div class="container mt-3">
+
+	<!-- Image and Bio -->
+	<div class="row align-items-center">
+          <div class="col-sm cc">
+	    <center>
+	      <img class="portret" src="img/me.jpg">
+	    </center>
+	  </div>
+          <div class="col-sm-8 cc bio">
+	    
+	    <p>I'm a mathematician interested in making pretty pictures with beautiful mathematics. My main interest is in physics simulation, computer graphics and numerical methods.</p>
+	    
+	    <p>Currently, I'm a PhD student at IST Austria supervised by <a href="http://pub.ist.ac.at/group_wojtan/index.html">Chris Wojtan</a>. Previously, I have studied mathematics at Charles University in Prague where I have worked under supervision of <a href="https://www.karlin.mff.cuni.cz/~prusv/">Vít Průša</a> and <a href="https://cgg.mff.cuni.cz/~jaroslav/">Jaroslav Křivánek</a></p>
+	    
+	  </div>
+
 	</div>
 
-	<!-- <\!-- Collect the nav links, forms, and other content for toggling -\-> -->
-	  <!-- <div class="collapse navbar-collapse navbar-right navbar-main-collapse"> -->
-            <!--   <ul class="nav navbar-nav"> -->
-	      <!--     <\!-- Hidden li included to remove active class from about link when scrolled up past about section -\-> -->
-		<!--     <li class="hidden"> -->
-		  <!--       <a href="#page-top"></a> -->
-		  <!--     </li> -->
-		<!--     <li> -->
-		  <!--       <a class="page-scroll" href="#about">🚴 CV</a> -->
-		  <!--     </li> -->
-		<!--     <li> -->
-		  <!--       <a class="page-scroll" href="#download">💩 Publications</a> -->
-		  <!--     </li> -->
-		<!--     <li> -->
-		  <!--       <a class="page-scroll" href="#contact">📧 Contact</a> -->
-		  <!--     </li> -->
-		<!--   </ul> -->
-	    <!-- </div> -->
-	  <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container -->
-    </nav>
 
+	<!-- Links to GitHub LinkedIn Google Scholar -->
+	<div class="row">
+          <div class="col cc"></div>
 
-    
-    <div class="container mt-3">
+	  <div class="col-auto cc">
+	    <script type="text/javascript" language="javascript">
+	      <!--
+		  // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+		  // Random encryption key feature coded by Andrew Moulden
+		  // This code is freeware provided these four comment lines remain intact
+		  // A wizard to generate this code is at http://www.jottings.com/obfuscator/
+		  { coded = "GmB3JSqYKRSG@nRS3Q.TKR"
+		  key = "ONG1iJRElxSu5eHBPInwK7pjkV309cQXtChLzUA6q2sZFvmMbDaT4WYr8ygdof"
+		  shift=coded.length
+		  link=""
+		  for (i=0; i<coded.length; i++) {
+		  if (key.indexOf(coded.charAt(i))==-1) {
+		  ltr = coded.charAt(i)
+		  link += (ltr)
+		  }
+		  else {     
+		  ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+		  link += (key.charAt(ltr))
+		  }
+		  }
+		  document.write("<a href='mailto:"+link+"'><img class=\"icon\" src=\"https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/gmail.svg\"></a>")
+		  }
+		  //-->
+	    </script><noscript>Sorry, you need Javascript on to email me.</noscript>
+	  </div>
+	  
+	  <div class="col-auto cc">
+	    <a href="https://scholar.google.com/citations?user=Vw8YoKEAAAAJ&hl=en&oi=ao">
+	      <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/googlescholar.svg">
+	    </a>
+	  </div>
+	  <div class="col-auto cc">
+	    <a href="https://github.com/lecopivo">
+	      <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/github.svg">
+	    </a>
+	  </div>
+	  <div class="col-auto cc">
+	    <a href="https://www.linkedin.com/in/tomas-skrivan-a121b9148/">
+	      <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/linkedin.svg">
+	    </a>
+	  </div>
 
-      <!-- Image and Bio -->
-      <div class="row align-items-center">
-        <div class="col-sm cc">
-	  <center>
-	    <img class="portret" src="img/me.jpg">
-	  </center>
+	  <div class="col cc"></div>
 	</div>
-        <div class="col-sm-8 cc bio">
-	  
-	  <p>I'm a mathematician interested in making pretty pictures with beautiful mathematics. My main interest is in physics simulation, computer graphics and numerical methods.</p>
-	  
-	  <p>Currently, I'm a PhD student at IST Austria supervised by <a href="http://pub.ist.ac.at/group_wojtan/index.html">Chris Wojtan</a>. Previously, I have studied mathematics at Charles University in Prague where I have worked under supervision of <a href="https://www.karlin.mff.cuni.cz/~prusv/">Vít Průša</a> and <a href="https://cgg.mff.cuni.cz/~jaroslav/">Jaroslav Křivánek</a></p>
-	  
+
+	<!-- Publications -->
+
+	<div class="row" id="publications">
+	  <div class="col-sm-12 cc">
+	    <h3>Publications</h3>
+	  </div>
 	</div>
 
-      </div>
+	<!-- 2020 -->
+	<div class="row align-items-center">
+	  <div class="col-sm-auto">
+	    <center>
+	      <img class="paper-icon" src="img/paper-icon-wcurves.jpg">
+	    </center>
+	  </div>
+	  <div class="col">
+	    <div class="paper-desc">
+	      <div class="paper-title">Wave Curves: Simulating Lagrangian water waves on dynamically deforming surfaces</div>
+	      <div class="paper-authors"><b>T. Skřivan</b>, A. Söderström, J.Johansson, C.Sprenger, K. Museth, C. Wojtan</div>
+	      <div class="paper-journal">ACM Transactions on Graphics, 2020</div>
+	      <div class="paper-links">
+		<a href="https://visualcomputing.ist.ac.at/publications/2020/WaveCurves/" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>      
+	
+	<!-- 2019 -->
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-misopti.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">Optimal multiple importance sampling</div>
+	      <div class="paper-authors">I. Kondapaneni, P. Vévoda, P. Grittmann, <b>T. Skřivan</b>, P. Slusallek, J. Křivánek</div>
+	      <div class="paper-journal">ACM Transactions on Graphics, 2019</div>
+	      <div class="paper-links">
+		<a href="https://doi.org/10.1145/3306346.3323009" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="https://cgg.mff.cuni.cz/~ivo/papers/2019-optmis/index.htm" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-
-      <!-- Links to GitHub LinkedIn Google Scholar -->
-      <div class="row">
-        <div class="col cc"></div>
-
-	<div class="col-auto cc">
-	  <script type="text/javascript" language="javascript">
-	    <!--
-		// Email obfuscator script 2.1 by Tim Williams, University of Arizona
-		// Random encryption key feature coded by Andrew Moulden
-		// This code is freeware provided these four comment lines remain intact
-		// A wizard to generate this code is at http://www.jottings.com/obfuscator/
-		{ coded = "GmB3JSqYKRSG@nRS3Q.TKR"
-		key = "ONG1iJRElxSu5eHBPInwK7pjkV309cQXtChLzUA6q2sZFvmMbDaT4WYr8ygdof"
-		shift=coded.length
-		link=""
-		for (i=0; i<coded.length; i++) {
-		if (key.indexOf(coded.charAt(i))==-1) {
-		ltr = coded.charAt(i)
-		link += (ltr)
-		}
-		else {     
-		ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
-		link += (key.charAt(ltr))
-		}
-		}
-		document.write("<a href='mailto:"+link+"'><img class=\"icon\" src=\"https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/gmail.svg\"></a>")
-		}
-		//-->
-	  </script><noscript>Sorry, you need Javascript on to email me.</noscript>
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-miscomp.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">MIS compensation: optimizing sampling techniques in multiple importance sampling</div>
+	      <div class="paper-authors">O. Karlík, M. Šik, P. Vévoda, <b>T. Skřivan</b>, J. Křivánek</div>
+	      <div class="paper-journal">ACM Transactions on Graphics, 2019</div>
+	      <div class="paper-links">
+		<a href="https://doi.org/10.1145/3355089.3356565" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="https://cgg.mff.cuni.cz/~jaroslav/papers/2019-mis-compensation/index.html" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 	
-	<div class="col-auto cc">
-	  <a href="https://scholar.google.com/citations?user=Vw8YoKEAAAAJ&hl=en&oi=ao">
-	    <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/googlescholar.svg">
-	  </a>
-	</div>
-	<div class="col-auto cc">
-	  <a href="https://github.com/lecopivo">
-	    <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/github.svg">
-	  </a>
-	</div>
-	<div class="col-auto cc">
-	  <a href="https://www.linkedin.com/in/tomas-skrivan-a121b9148/">
-	    <img class="icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/linkedin.svg">
-	  </a>
-	</div>
-
-	<div class="col cc"></div>
-      </div>
-
-      <!-- Publications -->
-
-      <div class="row">
-	<div class="col-sm-12 cc">
-	  <h3>Publications</h3>
-	</div>
-      </div>
-
-      <!-- 2020 -->
-      <div class="row align-items-center">
-	<div class="col-sm-auto">
-	  <center>
-	    <img class="paper-icon" src="img/paper-icon-wcurves.jpg">
-	  </center>
-	</div>
-	<div class="col">
-	  <div class="paper-desc">
-	    <div class="paper-title">Wave Curves: Simulating Lagrangian water waves on dynamically deforming surfaces</div>
-	    <div class="paper-authors"><b>T. Skřivan</b>, A. Söderström, J.Johansson, C.Sprenger, K. Museth, C. Wojtan</div>
-	    <div class="paper-journal">ACM Transactions on Graphics, 2020</div>
-	    <div class="paper-links">
-	      <a href="https://visualcomputing.ist.ac.at/publications/2020/WaveCurves/" class="btn-sm badge-button" role="button">project page</a>
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-diffvar.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">On diffusive variants of some classical viscoelastic rate-type models</div>
+	      <div class="paper-authors">M. Dostalík, V. Průša, <b>T. Skřivan</b></div>
+	      <div class="paper-journal">AIP Conference Proceedings 2107, 2019</div>
+	      <div class="paper-links">
+		<a href="https://doi.org/10.1063/1.5109493" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="https://arxiv.org/pdf/1902.07983.pdf" class="btn-sm badge-button" role="button">pdf</a>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-      </div>      
-      
-      <!-- 2019 -->
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-misopti.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">Optimal multiple importance sampling</div>
-	    <div class="paper-authors">I. Kondapaneni, P. Vévoda, P. Grittmann, <b>T. Skřivan</b>, P. Slusallek, J. Křivánek</div>
-	    <div class="paper-journal">ACM Transactions on Graphics, 2019</div>
-	    <div class="paper-links">
-	      <a href="https://doi.org/10.1145/3306346.3323009" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="https://cgg.mff.cuni.cz/~ivo/papers/2019-optmis/index.htm" class="btn-sm badge-button" role="button">project page</a>
+	
+	<!-- 2018 -->
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-wsw.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">Water surface wavelets</div>
+	      <div class="paper-authors">S. Jeschke, <b>T. Skřivan</b>, M. Müller-Fischer, N. Chentanez, M. Macklin, C. Wojtan</div>
+	      <div class="paper-journal">ACM Transactions on Graphics, 2018</div>
+	      <div class="paper-links">
+		<a href="https://doi.org/10.1145/3197517.3201336" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="http://visualcomputing.ist.ac.at/publications/2018/WSW/" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-      </div>
+	
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-stressdiff.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">Thermodynamics of viscoelastic rate-type fluids with stress diffusion</div>
+	      <div class="paper-authors">J. Málek, V. Průša, <b>T. Skřivan</b>, E. Süli</div>
+	      <div class="paper-journal">Physics of Fluids, 2016</div>
+	      <div class="paper-links">
+		<a href="https://doi.org/10.1063/1.5018172" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="https://arxiv.org/pdf/1706.06277.pdf" class="btn-sm badge-button" role="button">pdf</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 2017 -->
 
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-miscomp.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">MIS compensation: optimizing sampling techniques in multiple importance sampling</div>
-	    <div class="paper-authors">O. Karlík, M. Šik, P. Vévoda, <b>T. Skřivan</b>, J. Křivánek</div>
-	    <div class="paper-journal">ACM Transactions on Graphics, 2019</div>
-	    <div class="paper-links">
-	      <a href="https://doi.org/10.1145/3355089.3356565" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="https://cgg.mff.cuni.cz/~jaroslav/papers/2019-mis-compensation/index.html" class="btn-sm badge-button" role="button">project page</a>
+	<!-- 2016 -->
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-polbidir.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">Bi-Directional Polarised Light Transport></div>
+	      <div class="paper-authors">M. Mojzík, <b>T. Skřivan</b>, A. Wilkie, J. Křivánek</div>
+	      <div class="paper-journal">Eurographics Symposium on Rendering, Rendering - Experimental Ideas, 2016</div>
+	      <div class="paper-links">
+		<a href="http://dx.doi.org/10.2312/sre.20161215" class="btn-sm badge-button" role="button">doi</a>
+		|
+		<a href="https://cgg.mff.cuni.cz/~jaroslav/papers/2016-polarised-bidir/index.htm" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-      </div>
-      
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-diffvar.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">On diffusive variants of some classical viscoelastic rate-type models</div>
-	    <div class="paper-authors">M. Dostalík, V. Průša, <b>T. Skřivan</b></div>
-	    <div class="paper-journal">AIP Conference Proceedings 2107, 2019</div>
-	    <div class="paper-links">
-	      <a href="https://doi.org/10.1063/1.5109493" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="https://arxiv.org/pdf/1902.07983.pdf" class="btn-sm badge-button" role="button">pdf</a>
-	    </div>
-	  </div>
-	</div>
-      </div>
-      
-      <!-- 2018 -->
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-wsw.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">Water surface wavelets</div>
-	    <div class="paper-authors">S. Jeschke, <b>T. Skřivan</b>, M. Müller-Fischer, N. Chentanez, M. Macklin, C. Wojtan</div>
-	    <div class="paper-journal">ACM Transactions on Graphics, 2018</div>
-	    <div class="paper-links">
-	      <a href="https://doi.org/10.1145/3197517.3201336" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="http://visualcomputing.ist.ac.at/publications/2018/WSW/" class="btn-sm badge-button" role="button">project page</a>
-	    </div>
-	  </div>
-	</div>
-      </div>
-      
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-stressdiff.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">Thermodynamics of viscoelastic rate-type fluids with stress diffusion</div>
-	    <div class="paper-authors">J. Málek, V. Průša, <b>T. Skřivan</b>, E. Süli</div>
-	    <div class="paper-journal">Physics of Fluids, 2016</div>
-	    <div class="paper-links">
-	      <a href="https://doi.org/10.1063/1.5018172" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="https://arxiv.org/pdf/1706.06277.pdf" class="btn-sm badge-button" role="button">pdf</a>
-	    </div>
-	  </div>
-	</div>
-      </div>
-      <!-- 2017 -->
 
-      <!-- 2016 -->
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-polbidir.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">Bi-Directional Polarised Light Transport></div>
-	    <div class="paper-authors">M. Mojzík, <b>T. Skřivan</b>, A. Wilkie, J. Křivánek</div>
-	    <div class="paper-journal">Eurographics Symposium on Rendering, Rendering - Experimental Ideas, 2016</div>
-	    <div class="paper-links">
-	      <a href="http://dx.doi.org/10.2312/sre.20161215" class="btn-sm badge-button" role="button">doi</a>
-	      |
-	      <a href="https://cgg.mff.cuni.cz/~jaroslav/papers/2016-polarised-bidir/index.htm" class="btn-sm badge-button" role="button">project page</a>
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-msc.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">Shear and vorticity banding</div>
+	      <div class="paper-authors">Master Thesis, 2016</div>
+	      <div class="paper-journal">supervised by Vít Průša</div>
+	      <div class="paper-links">
+		<a href="https://is.cuni.cz/webapps/zzp/download/120240893/?lang=en" class="btn-sm badge-button" role="button">pdf</a>
+		|
+		<a href="https://is.cuni.cz/webapps/zzp/detail/164037/?lang=en" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-      </div>
 
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-msc.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">Shear and vorticity banding</div>
-	    <div class="paper-authors">Master Thesis, 2016</div>
-	    <div class="paper-journal">supervised by Vít Průša</div>
-	    <div class="paper-links">
-	      <a href="https://is.cuni.cz/webapps/zzp/download/120240893/?lang=en" class="btn-sm badge-button" role="button">pdf</a>
-	      |
-	      <a href="https://is.cuni.cz/webapps/zzp/detail/164037/?lang=en" class="btn-sm badge-button" role="button">project page</a>
+	
+
+	<div class="row align-items-center">
+	  <div class="col-sm-auto cc">
+	    <center> <img class="paper-icon" src="img/paper-icon-bc.jpg"> </center> </div>
+	  <div class="col cc">
+	    <div class="paper-desc">
+	      <div class="paper-title">3D Texture deformation according to a polygonal model</div>
+	      <div class="paper-authors">Bachelor Thesis, 2014</div>
+	      <div class="paper-journal">supervised by Jaroslav Křivánek</div>
+	      <div class="paper-links">
+		<a href="https://is.cuni.cz/webapps/zzp/download/130132929/?lang=en" class="btn-sm badge-button" role="button">pdf</a>
+		|
+		<a href="https://is.cuni.cz/webapps/zzp/detail/92817/?lang=en" class="btn-sm badge-button" role="button">project page</a>
+	      </div>
 	    </div>
 	  </div>
 	</div>
+	
       </div>
-
-      
-
-      <div class="row align-items-center">
-	<div class="col-sm-auto cc">
-	  <center> <img class="paper-icon" src="img/paper-icon-bc.jpg"> </center> </div>
-	<div class="col cc">
-	  <div class="paper-desc">
-	    <div class="paper-title">3D Texture deformation according to a polygonal model</div>
-	    <div class="paper-authors">Bachelor Thesis, 2014</div>
-	    <div class="paper-journal">supervised by Jaroslav Křivánek</div>
-	    <div class="paper-links">
-	      <a href="https://is.cuni.cz/webapps/zzp/download/130132929/?lang=en" class="btn-sm badge-button" role="button">pdf</a>
-	      |
-	      <a href="https://is.cuni.cz/webapps/zzp/detail/92817/?lang=en" class="btn-sm badge-button" role="button">project page</a>
-	    </div>
-	  </div>
-	</div>
-      </div>
-      
-    </div>
   </body>
 </html>
 
