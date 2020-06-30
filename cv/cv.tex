@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Plasmati Graduate CV
+% LaTeX Template
+% Version 1.0 (24/3/13)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+% 
+% Original author:
+% Alessandro Plasmati (alessandro.plasmati@gmail.com)
+% 
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Important note:
+% This template needs to be compiled with XeLaTeX.
+% The main document font is called Fontin and can be downloaded for free
+% from here: http://www.exljbris.com/fontin.html
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% ----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+% ----------------------------------------------------------------------------------------
+
+\documentclass[a4paper,10pt]{article} % Default font size and paper size
+
+\usepackage{fontspec} % For loading fonts
+\defaultfontfeatures{Mapping=tex-text}
+% \setmainfont[SmallCapsFont = Fontin SmallCaps]{Fontin} % Main document font
+
+\usepackage{xunicode,xltxtra,url,parskip} % Formatting packages
+
+\usepackage{bibentry}
+
+\usepackage[usenames,dvipsnames]{xcolor} % Required for specifying custom colors
+
+% \usepackage[big]{layaureo} % Margin formatting of the A4 page, an alternative to layaureo can be \usepackage{fullpage}
+\usepackage{fullpage}
+% To reduce the height of the top margin uncomment: \addtolength{\voffset}{-1.3cm}
+
+\usepackage{hyperref} % Required for adding links	and customizing them
+\definecolor{linkcolour}{rgb}{0,0.2,0.6} % Link color
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour} % Set link colors throughout the document
+
+\usepackage{titlesec} % Used to customize the \section command
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule] % Text formatting of sections
+\titlespacing{\section}{0pt}{3pt}{3pt} % Spacing around sections
+
+\begin{document}
+
+\bibliographystyle{alpha}
+\nobibliography{publications}
+
+\pagestyle{empty} % Removes page numbering
+
+\font\fb=''[cmr10]'' % Change the font of the \LaTeX command under the skills section
+
+% ----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION
+% ----------------------------------------------------------------------------------------
+
+\par{\centering{\Huge Tomáš \textsc{Skřivan}}\bigskip\par} % Your name
+
+\section{Personal Data}
+
+\begin{tabular}{rl}
+  \textsc{Place and Date of Birth:} & Czech Republic  | 16 August 1991 \\
+  \textsc{Address:} & Newaldgasse 3, Top 32, Vienna, Austria \\
+  \textsc{Phone:} & +43 681 20591468\\
+  \textsc{email:} & \href{mailto:tskrivan@ist.ac.at}{tskrivan@ist.ac.at}
+\end{tabular}
+
+
+% ----------------------------------------------------------------------------------------
+%	EDUCATION
+% ----------------------------------------------------------------------------------------
+
+\section{Education}
+
+\begin{tabular}{rl}
+  
+  \emph{Current} & \textbf{IST Austria}\\
+  2016           & Doctoral study in computer graphics \\
+                 & Advisor: Chris Wojtan \\
+                 &\\
+
+                 % ------------------------------------------------
+  
+  2014 - 2016 & \textbf{Charles University}, Faculty of Mathematics and Physics \\
+                 & Master study program: \emph{Mathematical Modelling in Physics and Technology} \\
+                 & Thesis: \emph{Shear and vorticity banding} \\
+                 & Advisor: Vít Průša \\
+                 &\\
+  
+                 % ------------------------------------------------
+
+  2010 - 2014 & \textbf{Charles University}, Faculty of Mathematics and Physics \\
+                 & Bachelor study program: \emph{Mathematics} \\
+                 & Thesis: \emph{3D Texture deformation according to a polygonal model} \\
+                 & Advisor: Jaroslav Křivánek \\
+                 &\\
+
+\end{tabular}
+
+% ----------------------------------------------------------------------------------------
+%	EDUCATION
+% ----------------------------------------------------------------------------------------
+
+\section{Education}
+
+\begin{tabular}{rl}
+  
+  \emph{Current} & \textbf{IST Austria}\\
+  2016           & Doctoral study in computer graphics \\
+                 & Advisor: Chris Wojtan \\
+                 &\\
+
+                 % ------------------------------------------------
+  
+  2014 - 2016 & \textbf{Charles University}, Faculty of Mathematics and Physics \\
+                 & Master study program: \emph{Mathematical Modelling in Physics and Technology} \\
+                 & Thesis: \emph{Shear and vorticity banding} \\
+                 & Advisor: Vít Průša \\
+                 &\\
+  
+                 % ------------------------------------------------
+
+  2010 - 2014 & \textbf{Charles University}, Faculty of Mathematics and Physics \\
+                 & Bachelor study program: \emph{Mathematics} \\
+                 & Thesis: \emph{3D Texture deformation according to a polygonal model} \\
+                 & Advisor: Jaroslav Křivánek \\
+                 &\\
+
+\end{tabular}
+
+
+
+
+% ----------------------------------------------------------------------------------------
+%	Publications
+% ----------------------------------------------------------------------------------------
+
+\section{Publications}
+
+\begin{itemize}
+\item \bibentry{jeschke2018water}
+\item \bibentry{malek2018thermodynamics}
+\item \bibentry{mojzik2016bi}
+\end{itemize}
+
+% ----------------------------------------------------------------------------------------
+%	Teaching
+% ----------------------------------------------------------------------------------------
+
+\section{Teaching}
+
+\begin{tabular}{rl}
+  Fall 2015 & \textbf{Mathematical Analysis I} - teaching assistant \\
+            & Charles University, Faculty of Mathematics and Physics \\
+            & \\
+
+  Spring 2016 & \textbf{Mathematical Analysis II} - teaching assistant \\
+            & Charles University, Faculty of Mathematics and Physics \\
+\end{tabular}
+
+% ----------------------------------------------------------------------------------------
+%	Other
+% ----------------------------------------------------------------------------------------
+
+\section{Other}
+
+\begin{tabular}{rl}
+  \textsc{Languages}:   & Czech(native), English(fluent) \\
+  \textsc{Programming}: & C++, Python, Maya API, Houdini VEX, FEniCS \\
+  \textsc{Software}:    & Matlab, Mathematica, Maya, 3ds Max, Houdini, Zbrush
+\end{tabular}
+
+% ----------------------------------------------------------------------------------------
+
+
+
+
+\end{document}
