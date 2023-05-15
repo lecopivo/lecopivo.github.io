@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="alectryon-standalone" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.20: https://docutils.sourceforge.io/" />
+<title>Harmonic Oscillator in SciLean</title>
+<script type="text/javascript" defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.min.js?config=TeX-AMS_CHTML"></script>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="pygments.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="alectryon-root alectryon-centered"><div class="document" id="harmonic-oscillator-in-scilean">
+<h1 class="title">Harmonic Oscillator in SciLean</h1>
+
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-wsp"><span class="kn">import</span> SciLean.Mechanics
+<span class="kn">import</span> SciLean.Operators.ODE
+<span class="kn">import</span> SciLean.Solver 
+<span class="kn">import</span> SciLean.Tactic.LiftLimit
+<span class="kn">import</span> SciLean.Tactic.FinishImpl
+
+<span class="kn">open</span> SciLean</span></pre><p>Let's demonstrate basic capabilities of SciLean on the simulation of 
+harmonic oscillator.</p>
+<p>The energy of harmonic oscillator is</p>
+<div class="math">
+\begin{equation*}
+H(x,p) = \frac{1}{2m} p^2 + \frac{k}{2} x^2
+\end{equation*}
+</div>
+<p>As a Lean code, this is:</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-wsp"><span class="kd">def</span> H (m k : ℝ) (x p : ℝ) := <span class="mi">1</span><span class="bp">/</span>(<span class="mi">2</span><span class="bp">*</span>m) <span class="bp">*</span> <span class="bp">∥</span>p<span class="bp">∥²</span> <span class="bp">+</span> k<span class="bp">/</span><span class="mi">2</span> <span class="bp">*</span> <span class="bp">∥</span>x<span class="bp">∥²</span></span></pre><p>To compute a derivative of a function <code class="highlight coq"><span class="n">f</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">→</span> <span class="n">ℝ</span></code></p>
+<div class="math">
+\begin{equation*}
+\frac{\partial}{\partial x} f(x) \qquad \text{or} \qquad \frac{\partial}{\partial x'}\bigg\rvert_{x'=x} f(x') 
+\end{equation*}
+</div>
+<p>we write <code class="highlight coq"><span class="o">∇</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span></code> or <code class="highlight coq"><span class="kr">λ</span> <span class="nv">x</span> <span class="o">=&gt;</span> <span class="o">∇</span> <span class="o">(</span><span class="n">x'</span><span class="o">:=</span><span class="n">x</span><span class="o">),</span> <span class="n">f</span> <span class="n">x'</span></code>.</p>
+<p>The derivative w.r.t position of the Hamiltonian is</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk0" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk0"><span class="k">#check</span></label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message">AutoImpl.val
+  (Eq.mpr (_ : (AutoImpl <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x) <span class="bp">=</span> AutoImpl <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x)
+    AutoImpl.finish) : ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ</blockquote></div></div></small></span><span class="alectryon-wsp"> (<span class="bp">λ</span> m k x p <span class="bp">=&gt;</span> <span class="bp">∇</span> (x&#39;:=x), H m k x&#39; p) 
+  rewrite_by</span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk1" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk1">(</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk2" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk2">simp[H,gradient]</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x</div></blockquote></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk3" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk3">trace_state</label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="bp">|</span> <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x</blockquote></div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input checked="checked" class="alectryon-toggle" id="harmonic-oscillator-lean-chk4" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk4">)</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x</div></blockquote></div></div></small></span></pre><p>And the derivative w.r.t momentum of the Hamiltonian is</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk5" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk5"><span class="k">#check</span></label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message">AutoImpl.val
+  (Eq.mpr
+    (_ : (AutoImpl <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p) <span class="bp">=</span> AutoImpl <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> p)
+    AutoImpl.finish) : ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ</blockquote></div></div></small></span><span class="alectryon-wsp"> (<span class="bp">λ</span> m k x p <span class="bp">=&gt;</span> <span class="bp">∇</span> (p&#39;:=p), H m k x p&#39;) 
+  rewrite_by</span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk6" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk6">(</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk7" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk7">simp[H,gradient,hold]</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> p</div></blockquote></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk8" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk8">trace_state</label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="bp">|</span> <span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> p</blockquote></div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> p</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input checked="checked" class="alectryon-toggle" id="harmonic-oscillator-lean-chk9" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk9">)</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="k">fun</span> m k x p <span class="bp">=&gt;</span> <span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> p</div></blockquote></div></div></small></span></pre><p>To run a simulation means to numerically solve some differential equation.
+Surprisingly, SciLean defines a function <code class="highlight coq"><span class="n">ode_solve</span></code> that solves a generic 
+differential equation exactly</p>
+<div class="math">
+\begin{equation*}
+\dot x = f(x) \qquad x(0) = x_0
+\end{equation*}
+</div>
+<p>The catch is that this function is not computable. This means there is 
+no universal algorithm that would give you a solution of the above 
+differential equation for any <code class="highlight coq"><span class="n">f</span></code>. Nontheless, <code class="highlight coq"><span class="n">ode_solve</span></code> is well 
+defined and in SciLean we use it to specify what kind of program we 
+want to build.</p>
+<p>Let's have a look at the type signature of <code class="highlight coq"><span class="n">ode_solve</span></code></p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input checked="checked" class="alectryon-toggle" id="harmonic-oscillator-lean-chka" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chka"><span class="k">#check</span></label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="k">fun</span> {X} [Vec X] f t x₀ <span class="bp">=&gt;</span> ode_solve f t x₀ : {X : <span class="kt">Type</span> u_1} <span class="bp">→</span> [inst : Vec X] <span class="bp">→</span> (X <span class="bp">→</span> X) <span class="bp">→</span> ℝ <span class="bp">→</span> X <span class="bp">→</span> X</blockquote></div></div></small></span><span class="alectryon-wsp"> <span class="bp">λ</span> {X} [Vec X] (f : X <span class="bp">→</span> X) (t : ℝ) (x₀ : X)  <span class="bp">=&gt;</span> ode_solve f t x₀</span></pre><p>For harmonic oscillator, the evolution is given by Hamilton's equations</p>
+\begin{align}
+\dot x &= \frac{\partial H}{\partial p} \\
+\dot p &= - \frac{\partial H}{\partial x} 
+\end{align}<p>Thus the function <code class="highlight coq"><span class="n">f</span></code> that needs to be provided to <code class="highlight coq"><span class="n">ode_solve</span></code> is 
+<code class="highlight coq"><span class="kr">λ</span> <span class="o">(</span><span class="nv">x</span><span class="o">,</span><span class="n">p</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="o">(∇</span> <span class="o">(</span><span class="n">p'</span><span class="o">:=</span><span class="n">p</span><span class="o">),</span> <span class="n">H</span> <span class="n">x</span> <span class="n">p'</span><span class="o">,</span> <span class="o">∇</span> <span class="o">(</span><span class="n">x'</span><span class="o">:=</span><span class="n">x</span><span class="o">),</span> <span class="n">H</span> <span class="n">x'</span> <span class="n">p</span><span class="o">)</span></code></p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input checked="checked" class="alectryon-toggle" id="harmonic-oscillator-lean-chkb" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chkb"><span class="k">#check</span></label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="k">fun</span> m k x <span class="bp">=&gt;</span>
+  <span class="k">match</span> x <span class="k">with</span>
+  <span class="bp">|</span> (x, p) <span class="bp">=&gt;</span> (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p, <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x) : ℝ <span class="bp">→</span> ℝ <span class="bp">→</span> ℝ <span class="bp">×</span> ℝ <span class="bp">→</span> ℝ <span class="bp">×</span> ℝ</blockquote></div></div></small></span><span class="alectryon-wsp"> <span class="bp">λ</span> m k (x,p) <span class="bp">=&gt;</span> (<span class="bp">∇</span> (p&#39;:=p), H m k x p&#39;, <span class="bp">-</span> <span class="bp">∇</span> (x&#39;:=x), H m k x&#39; p)</span></pre><p>Now we turn in to very interesing style of programming. We provide 
+a specification and a series of commands(tactics) we construct a runnable
+program.</p>
+<p>To run a simulation on a compute we want an implementation of a differential
+equation solver i.e. we want a withness of <code class="highlight coq"><span class="n">Impl</span> <span class="o">(</span><span class="n">ode_solve</span> <span class="n">f</span><span class="o">)</span></code>.</p>
+<p>For harmonic oscillator this is</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-wsp"><span class="c1">-- set_option trace.Meta.Tactic.simp.rewrite true in</span>
+<span class="kd">def</span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chkc" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chkc">solver</label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message">Warning: declaration uses <span class="bp">&#39;</span><span class="gr">sorry</span><span class="bp">&#39;</span></blockquote></div></div></small></span><span class="alectryon-wsp"> (m k : ℝ) (steps : Nat)
+  : Impl (ode_solve 
+           <span class="bp">λ</span> (x,p) <span class="bp">=&gt;</span> (  <span class="bp">∇</span> (p&#39;:=p), H m k x p&#39;, 
+                       <span class="bp">-</span> <span class="bp">∇</span> (x&#39;:=x), H m k x&#39; p)) :=
+</span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chkd" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chkd"><span class="kd">by</span>
+  <span class="c1">-- unfold Hamiltonian definition</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    <span class="k">match</span> x <span class="k">with</span>
+    <span class="bp">|</span> (x, p) <span class="bp">=&gt;</span> (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p, <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x))</div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chke" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chke">simp [H]</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> <span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m) <span class="bp">*</span> <span class="bp">∥</span>p&#39;<span class="bp">∥²</span> <span class="bp">+</span> k <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">∥</span>x.fst<span class="bp">∥²</span>) x.snd,
+      <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> <span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m) <span class="bp">*</span> <span class="bp">∥</span>x.snd<span class="bp">∥²</span> <span class="bp">+</span> k <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">∥</span>x&#39;<span class="bp">∥²</span>) x.fst))</div></blockquote></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chkf" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chkf">
+
+  <span class="c1">-- compute gradients</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    <span class="k">match</span> x <span class="k">with</span>
+    <span class="bp">|</span> (x, p) <span class="bp">=&gt;</span> (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p, <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x))</div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk10" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk10">simp[gradient, hold]</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span> (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))</div></blockquote></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk11" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk11">
+
+  <span class="c1">-- apply RK4 method</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    <span class="k">match</span> x <span class="k">with</span>
+    <span class="bp">|</span> (x, p) <span class="bp">=&gt;</span> (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p, <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x))</div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk12" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk12">rw [</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span> (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk13" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk13">ode_solve_fixed_dt runge_kutta4_step</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (limit (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk14" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk14">]</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (limit (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))</div></blockquote></div></div></small></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk15" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk15">
+
+  <span class="c1">-- agree that we solve the original goal only approximately</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  (ode_solve <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    <span class="k">match</span> x <span class="k">with</span>
+    <span class="bp">|</span> (x, p) <span class="bp">=&gt;</span> (gradient (<span class="k">fun</span> p&#39; <span class="bp">=&gt;</span> H m k x p&#39;) p, <span class="bp">-</span>gradient (<span class="k">fun</span> x&#39; <span class="bp">=&gt;</span> H m k x&#39; p) x))</div></blockquote></div></div></small><span class="alectryon-wsp"> 
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk16" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk16">lift_limit steps <span class="s2">&quot;Number of ODE solver steps.&quot;</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">(limit (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) <span class="k">fun</span> x <span class="bp">=&gt;</span>
+    (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst))) <span class="bp">=</span>
+  limit <span class="k">fun</span> n <span class="bp">=&gt;</span>
+    (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) n <span class="k">fun</span> x <span class="bp">=&gt;</span>
+      (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst))</div></blockquote><div class="alectryon-extra-goals"><input class="alectryon-extra-goal-toggle" id="harmonic-oscillator-lean-chk17" style="display: none" type="checkbox"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><label class="goal-separator" for="harmonic-oscillator-lean-chk17"><hr></label><div class="goal-conclusion">Impl
+  ((<span class="k">fun</span> n <span class="bp">=&gt;</span>
+      (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) n <span class="k">fun</span> x <span class="bp">=&gt;</span>
+        (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))
+    steps)</div></blockquote></div></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk18" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk18"><span class="gr">admit</span></label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl
+  ((<span class="k">fun</span> n <span class="bp">=&gt;</span>
+      (<span class="k">fun</span> n <span class="bp">=&gt;</span> ode_solve_fixed_dt_impl n runge_kutta4_step) n <span class="k">fun</span> x <span class="bp">=&gt;</span>
+        (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))
+    steps)</div></blockquote></div></div></small></span><span class="alectryon-wsp"><span class="bp">;</span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk19" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk19">simp</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><span><var>m, k</var><span class="hyp-type"><b>: </b><span>ℝ</span></span></span><br><span><var>steps</var><span class="hyp-type"><b>: </b><span>ℕ</span></span></span><br></div><span class="goal-separator"><hr></span><div class="goal-conclusion">Impl (ode_solve_fixed_dt_impl steps runge_kutta4_step <span class="k">fun</span> x <span class="bp">=&gt;</span> (<span class="mi">2</span> <span class="bp">*</span> (<span class="mi">1</span> <span class="bp">/</span> (<span class="mi">2</span> <span class="bp">*</span> m)) <span class="bp">*</span> x.snd, <span class="bp">-</span>(<span class="mi">2</span> <span class="bp">*</span> (k <span class="bp">/</span> <span class="mi">2</span>) <span class="bp">*</span> x.fst)))</div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">
+</span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="harmonic-oscillator-lean-chk1a" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk1a">finish_impl</label><small class="alectryon-output"><div><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion">Goals accomplished<span class="bp">!</span> <span class="bp">🐙</span></div></blockquote></div></div></small></span></pre><p>Run the simulation and do a simple plotting</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-wsp"><span class="kd">def</span> main : IO Unit := <span class="k">do</span>
+
+  <span class="k">let</span> substeps := <span class="mi">1</span>
+  <span class="k">let</span> m := <span class="mi">1</span><span class="bp">.</span><span class="mi">0</span>
+  <span class="k">let</span> k := <span class="mi">10</span><span class="bp">.</span><span class="mi">0</span>
+
+  <span class="k">let</span> evolve <span class="bp">←</span> (solver m k substeps)<span class="bp">.</span>assemble
+
+  <span class="k">let</span> x₀ := <span class="mi">1</span><span class="bp">.</span><span class="mi">0</span>
+  <span class="k">let</span> p₀ := <span class="mi">0</span><span class="bp">.</span><span class="mi">0</span>
+  <span class="k">let</span> mut (x,p) := (x₀, p₀)
+
+  for _ <span class="k">in</span> [<span class="mi">0</span>:<span class="mi">40</span>] <span class="k">do</span>
+
+    (x, p) := evolve <span class="mi">0</span><span class="bp">.</span><span class="mi">1</span> (x, p)
+
+    <span class="c1">-- print</span>
+    for (j : Nat) <span class="k">in</span> [<span class="mi">0</span>:<span class="mi">20</span>] <span class="k">do</span>
+      <span class="k">if</span> j <span class="bp">&lt;</span> <span class="mi">10</span><span class="bp">*</span>(x<span class="bp">+</span><span class="mi">1</span>) <span class="k">then</span>
+        IO.print <span class="s2">&quot;o&quot;</span>
+    IO.println <span class="s2">&quot;&quot;</span></span></pre><p>The actual run</p>
+<pre class="alectryon-io highlight"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input checked="checked" class="alectryon-toggle" id="harmonic-oscillator-lean-chk1b" style="display: none" type="checkbox"><label class="alectryon-input" for="harmonic-oscillator-lean-chk1b"><span class="k">#eval</span></label><small class="alectryon-output"><div><div class="alectryon-messages"><blockquote class="alectryon-message">oooooooooooooooooooo
+ooooooooooooooooooo
+oooooooooooooooo
+oooooooooooooo
+oooooooooo
+ooooooo
+ooooo
+oo
+o
+o
+o
+ooo
+ooooo
+oooooooo
+ooooooooooo
+oooooooooooooo
+ooooooooooooooooo
+ooooooooooooooooooo
+oooooooooooooooooooo
+oooooooooooooooooooo
+oooooooooooooooooooo
+oooooooooooooooooo
+oooooooooooooooo
+ooooooooooooo
+oooooooooo
+ooooooo
+oooo
+oo
+o
+o
+o
+ooo
+ooooo
+oooooooo
+ooooooooooo
+oooooooooooooo
+ooooooooooooooooo
+ooooooooooooooooooo
+oooooooooooooooooooo
+oooooooooooooooooooo
+</blockquote></div></div></small></span><span class="alectryon-wsp"> main</span></pre>
+</div>
+</div></body>
+</html>
